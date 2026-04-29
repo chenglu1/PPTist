@@ -105,7 +105,8 @@ const imageElement = computed(() => props.elementInfo)
 const { clipShape, imgPosition } = useClipImage(imageElement)
 
 const filters = computed(() => props.elementInfo.filters)
-const { filter } = useFilter(filters)
+const isTemplateImage = computed(() => !!props.elementInfo.imageType)
+const { filter } = useFilter(filters, isTemplateImage)
 
 const handleSelectElement = (e: MouseEvent | TouchEvent) => {
   if (props.elementInfo.lock) return

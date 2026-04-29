@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { nanoid } from 'nanoid'
-import type { ImageClipDataRange, PPTElement, PPTImageElement, PPTShapeElement, PPTTextElement, Slide, TextType } from '@/types/slides'
+import type { ImageClipDataRange, ImageElementFilters, PPTElement, PPTImageElement, PPTShapeElement, PPTTextElement, Slide, TextType } from '@/types/slides'
 import type { AIPPTSlide } from '@/types/AIPPT'
 import { useSlidesStore } from '@/store'
 import useAddSlidesOrElements from './useAddSlidesOrElements'
@@ -201,10 +201,22 @@ export default () => {
   
     return img
   }
+
+    const getAIPPTImageFilters = (filters?: ImageElementFilters): ImageElementFilters | undefined => {
+      if (!filters) return undefined
+
+      // Template placeholders often use grayscale for mockups, but generated decks should preserve source image colors.
+      const { grayscale, ...restFilters } = filters
+      if (!grayscale) return filters
+      if (!Object.keys(restFilters).length) return undefined
+
+      return restFilters
+    }
   
   const getNewImgElement = (el: PPTImageElement): PPTImageElement => {
     const img = getUseableImage(el)
-    if (!img) return el
+      const filters = getAIPPTImageFilters(el.filters)
+      if (!img) return { ...el, filters }
   
     let scale = 1
     let w = el.width
@@ -227,7 +239,7 @@ export default () => {
     const clip = { range, shape: clipShape }
     const src = img.src
   
-    return { ...el, src, clip }
+    return { ...el, src, clip, filters }
   }
   
   const getMdContent = (content: string) => {
@@ -320,7 +332,7 @@ export default () => {
       if (item.type === 'cover') {
         const coverTemplate = coverTemplates[Math.floor(Math.random() * coverTemplates.length)]
         const elements = coverTemplate.elements.map(el => {
-          if (el.type === 'image' && el.imageType && imgPool.value.length) return getNewImgElement(el)
+          if (el.type === 'image' && el.imageType) return getNewImgElement(el)
           if (el.type !== 'text' && el.type !== 'shape') return el
           if (checkTextType(el, 'title') && item.data.title) {
             return getNewTextElement({ el, text: item.data.title, maxLine: 1 })
@@ -395,7 +407,7 @@ export default () => {
         const unusedElIds: string[] = []
         const unusedGroupIds: string[] = []
         const elements = contentsTemplate.elements.map(el => {
-          if (el.type === 'image' && el.imageType && imgPool.value.length) return getNewImgElement(el)
+          if (el.type === 'image' && el.imageType) return getNewImgElement(el)
           if (el.type !== 'text' && el.type !== 'shape') return el
           if (checkTextType(el, 'item')) {
             const index = sortedItemIds.findIndex(id => id === el.id)
@@ -421,7 +433,7 @@ export default () => {
       else if (item.type === 'transition') {
         transitionIndex.value = transitionIndex.value + 1
         const elements = transitionTemplate.value.elements.map(el => {
-          if (el.type === 'image' && el.imageType && imgPool.value.length) return getNewImgElement(el)
+          if (el.type === 'image' && el.imageType) return getNewImgElement(el)
           if (el.type !== 'text' && el.type !== 'shape') return el
           if (checkTextType(el, 'title') && item.data.title) {
             return getNewTextElement({ el, text: item.data.title, maxLine: 1 })
@@ -473,7 +485,7 @@ export default () => {
         const longestText = itemTexts.reduce((longest, current) => current.length > longest.length ? current : longest, '')
 
         const elements = contentTemplate.elements.map(el => {
-          if (el.type === 'image' && el.imageType && imgPool.value.length) return getNewImgElement(el)
+          if (el.type === 'image' && el.imageType) return getNewImgElement(el)
           if (el.type !== 'text' && el.type !== 'shape') return el
           if (item.data.items.length === 1) {
             const contentItem = item.data.items[0]
@@ -516,7 +528,7 @@ export default () => {
       else if (item.type === 'end') {
         const endTemplate = endTemplates[Math.floor(Math.random() * endTemplates.length)]
         const elements = endTemplate.elements.map(el => {
-          if (el.type === 'image' && el.imageType && imgPool.value.length) return getNewImgElement(el)
+          if (el.type === 'image' && el.imageType) return getNewImgElement(el)
           return el
         })
         slides.push({
