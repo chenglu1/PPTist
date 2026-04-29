@@ -3,8 +3,12 @@ import fetchRequest from './fetch'
 
 // export const SERVER_URL = 'http://localhost:5000'
 const customServerUrl = import.meta.env.VITE_API_BASE_URL?.trim()
+const customImageSearchServerUrl = import.meta.env.VITE_IMAGE_SEARCH_BASE_URL?.trim()
 const devServerUrl = '/api'
-export const SERVER_URL = customServerUrl || ((import.meta.env.MODE === 'development') ? devServerUrl : 'https://server.pptist.cn')
+const defaultRemoteServerUrl = 'https://server.pptist.cn'
+
+export const SERVER_URL = customServerUrl || ((import.meta.env.MODE === 'development') ? devServerUrl : defaultRemoteServerUrl)
+export const IMAGE_SEARCH_SERVER_URL = customImageSearchServerUrl || defaultRemoteServerUrl
 
 interface ImageSearchPayload {
   query: string;
@@ -41,7 +45,7 @@ export default {
   },
 
   searchImage(body: ImageSearchPayload): Promise<any> {
-    return axios.post(`${SERVER_URL}/tools/img_search`, body)
+    return axios.post(`${IMAGE_SEARCH_SERVER_URL}/tools/img_search`, body)
   },
 
   AIPPT_Outline({
