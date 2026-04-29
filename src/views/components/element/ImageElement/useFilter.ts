@@ -2,7 +2,7 @@ import { computed, type Ref } from 'vue'
 import type { ImageElementFilters, ImageElementFilterKeys } from '@/types/slides'
 
 export default (filters: Ref<ImageElementFilters | undefined>, isTemplateImage?: Ref<boolean | undefined>) => {
-  const normalizedFilters = computed(() => {
+  const normalizedFilters = computed<ImageElementFilters | undefined>(() => {
     if (!filters.value) return undefined
     if (!isTemplateImage?.value) return filters.value
 
@@ -10,7 +10,9 @@ export default (filters: Ref<ImageElementFilters | undefined>, isTemplateImage?:
     const isPlaceholderFilter = keys.includes('grayscale') && keys.every(key => key === 'grayscale' || key === 'opacity')
     if (!isPlaceholderFilter) return filters.value
 
-    const { grayscale, ...restFilters } = filters.value
+    const restFilters: ImageElementFilters = { ...filters.value }
+    delete restFilters.grayscale
+
     if (!Object.keys(restFilters).length) return undefined
     return restFilters
   })
