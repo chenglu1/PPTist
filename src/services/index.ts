@@ -87,7 +87,7 @@ export default {
       body: JSON.stringify({
         content,
         command,
-        model: 'gemini-2.5-flash',
+        model: 'glm-4.7-flash',
         stream: true,
       }),
     })

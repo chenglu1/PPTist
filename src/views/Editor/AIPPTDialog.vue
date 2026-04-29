@@ -59,8 +59,7 @@
             style="width: 190px;"
             v-model:value="model"
             :options="[
-              { label: 'Gemini 2.5 Flash', value: 'gemini-2.5-flash' },
-              { label: 'Gemini 2.5 Flash-Lite', value: 'gemini-2.5-flash-lite' },
+              { label: '智谱 GLM-4.7-Flash', value: 'glm-4.7-flash' },
             ]"
           />
         </div>
@@ -152,7 +151,7 @@ const loading = ref(false)
 const outlineCreating = ref(false)
 const overwrite = ref(true)
 const step = ref<'setup' | 'outline' | 'template'>('setup')
-const model = ref('gemini-2.5-flash')
+const model = ref('glm-4.7-flash')
 const outlineRef = useTemplateRef<HTMLElement>('outlineRef')
 const inputRef = useTemplateRef<InstanceType<typeof Input>>('inputRef')
 
@@ -169,6 +168,38 @@ const recommends = ref([
   '新能源产业发展趋势',
   '数字农业发展路径',
   '智慧政务建设方案',
+  '高校教学改革实践',
+  '在线教育平台运营策略',
+  '互联网医疗服务创新',
+  '慢病管理体系建设',
+  '银行数字化转型',
+  '保险产品创新方案',
+  '工厂降本增效路径',
+  '工业互联网应用场景',
+  '电商品牌增长策略',
+  '私域流量运营方案',
+  '连锁餐饮品牌升级',
+  '外卖业务优化策略',
+  '酒店运营提升方案',
+  '景区数字化升级',
+  '仓储管理优化方案',
+  '跨境物流行业分析',
+  '商业地产运营优化',
+  '城市更新项目分析',
+  '光伏产业发展趋势',
+  '储能行业市场分析',
+  '乡村振兴项目策划',
+  '农产品品牌建设',
+  '公共服务数字化升级',
+  '智慧城市建设路径',
+  '人力资源管理优化',
+  '企业培训体系建设',
+  '消费电子市场分析',
+  'AI 产品落地场景',
+  'SaaS 产品增长策略',
+  '企业数据治理方案',
+  '环保产业发展研究',
+  '绿色供应链建设',
 ]) 
 
 onMounted(() => {
@@ -419,6 +450,9 @@ const uploadLocalTemplate = () => {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+  max-height: 92px;
+  overflow: auto;
+  padding-right: 4px;
 
   .recommend {
     font-size: 12px;
