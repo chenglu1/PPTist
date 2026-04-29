@@ -352,7 +352,7 @@ const execAI = async (command: string) => {
     command,
   })
   if (typeof stream === 'object' && stream.state === -1) {
-    return message.error('该模型API的并发数过高，请更换其他模型重试')
+    return message.error(stream.message || 'AI 文案处理失败，请稍后重试')
   }
 
   isAIWriting.value = true

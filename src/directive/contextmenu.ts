@@ -8,6 +8,8 @@ interface CustomHTMLElement extends HTMLElement {
 } 
 
 const contextmenuListener = (el: HTMLElement, event: MouseEvent, binding: DirectiveBinding) => {
+  if (event.shiftKey) return
+
   event.stopPropagation()
   event.preventDefault()
 

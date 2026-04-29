@@ -2,7 +2,9 @@ import axios from './axios'
 import fetchRequest from './fetch'
 
 // export const SERVER_URL = 'http://localhost:5000'
-export const SERVER_URL = (import.meta.env.MODE === 'development') ? '/api' : 'https://server.pptist.cn'
+const customServerUrl = import.meta.env.VITE_API_BASE_URL?.trim()
+const devServerUrl = '/api'
+export const SERVER_URL = customServerUrl || ((import.meta.env.MODE === 'development') ? devServerUrl : 'https://server.pptist.cn')
 
 interface ImageSearchPayload {
   query: string;
@@ -85,7 +87,7 @@ export default {
       body: JSON.stringify({
         content,
         command,
-        model: 'glm-4.7-flash',
+        model: 'gemini-2.5-flash',
         stream: true,
       }),
     })

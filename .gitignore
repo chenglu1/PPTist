@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+agno_service/.env
 
 node_modules
 .DS_Store
@@ -21,6 +22,8 @@ coverage
 .vscode/*
 !.vscode/extensions.json
 .idea
+.venv/
+__pycache__/
 *.suo
 *.ntvs*
 *.njsproj

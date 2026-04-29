@@ -152,11 +152,5 @@ declare module 'vue' {
     'IIconParkSolid:checkOne': typeof import('~icons/icon-park-solid/check-one')['default']
     'IIconParkSolid:closeOne': typeof import('~icons/icon-park-solid/close-one')['default']
     'IIconParkSolid:info': typeof import('~icons/icon-park-solid/info')['default']
-    'IIconParkTwotone:click': typeof import('~icons/icon-park-twotone/click')['default']
-    'IIconParkTwotone:fileJpg': typeof import('~icons/icon-park-twotone/file-jpg')['default']
-    'IIconParkTwotone:filePdf': typeof import('~icons/icon-park-twotone/file-pdf')['default']
-    'IIconParkTwotone:leftTwo': typeof import('~icons/icon-park-twotone/left-two')['default']
-    'IIconParkTwotone:notes': typeof import('~icons/icon-park-twotone/notes')['default']
-    'IIconParkTwotone:rightTwo': typeof import('~icons/icon-park-twotone/right-two')['default']
   }
 }

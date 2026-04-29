@@ -8,9 +8,15 @@ const request = async (url: string, options: RequestInit): Promise<Response> => 
   })
 
   const contentType = response.headers.get('content-type')
+  const streamContentTypes = [
+    'text/event-stream',
+    'application/octet-stream',
+    'application/x-ndjson',
+    'text/plain',
+    'text/markdown',
+  ]
   const isStreamResponse = contentType && (
-    contentType.includes('text/event-stream') ||
-    contentType.includes('application/octet-stream')
+    streamContentTypes.some(type => contentType.includes(type))
   )
 
   if (!isStreamResponse) {

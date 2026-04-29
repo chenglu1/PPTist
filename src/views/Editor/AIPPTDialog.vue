@@ -59,8 +59,8 @@
             style="width: 190px;"
             v-model:value="model"
             :options="[
-              { label: 'GLM-4.7-Flash', value: 'glm-4.7-flash' },
-              { label: 'Doubao-Seed-1.6-Flash', value: 'doubao-seed-1.6-flash' },
+              { label: 'Gemini 2.5 Flash', value: 'gemini-2.5-flash' },
+              { label: 'Gemini 2.5 Flash-Lite', value: 'gemini-2.5-flash-lite' },
             ]"
           />
         </div>
@@ -152,21 +152,23 @@ const loading = ref(false)
 const outlineCreating = ref(false)
 const overwrite = ref(true)
 const step = ref<'setup' | 'outline' | 'template'>('setup')
-const model = ref('glm-4.7-flash')
+const model = ref('gemini-2.5-flash')
 const outlineRef = useTemplateRef<HTMLElement>('outlineRef')
 const inputRef = useTemplateRef<InstanceType<typeof Input>>('inputRef')
 
 const recommends = ref([
-  '2025科技前沿动态',
-  '大数据如何改变世界',
-  '餐饮市场调查与研究',
-  'AIGC在教育领域的应用',
-  '社交媒体与品牌营销',
-  '5G技术如何改变我们的生活',
-  '年度工作总结与展望',
-  '区块链技术及其应用',
-  '大学生职业生涯规划',
-  '公司年会策划方案',
+  '教育行业数字化转型',
+  '智慧医疗发展趋势',
+  '金融风控体系建设',
+  '智能制造转型升级',
+  '新零售用户增长策略',
+  '餐饮门店运营优化',
+  '文旅品牌策划方案',
+  '物流供应链协同优化',
+  '房地产市场趋势分析',
+  '新能源产业发展趋势',
+  '数字农业发展路径',
+  '智慧政务建设方案',
 ]) 
 
 onMounted(() => {
@@ -193,7 +195,8 @@ const createOutline = async () => {
   })
   if (typeof stream === 'object' && stream.state === -1) {
     loading.value = false
-    return message.error('该模型API的并发数过高，请更换其他模型重试')
+    outlineCreating.value = false
+    return message.error(stream.message || 'AI 大纲生成失败，请稍后重试')
   }
 
   loading.value = false
@@ -241,7 +244,7 @@ const createPPT = async (template?: { slides: Slide[], theme: SlideTheme }) => {
     loading.value = false
     message.closeAll()
     mainStore.setAIPPTDialogState(true)
-    return message.error('该模型API的并发数过高，请更换其他模型重试')
+    return message.error(stream.message || 'AI 幻灯片生成失败，请稍后重试')
   }
 
   if (img.value === 'test') {
@@ -256,10 +259,12 @@ const createPPT = async (template?: { slides: Slide[], theme: SlideTheme }) => {
 
   const reader: ReadableStreamDefaultReader = stream.body.getReader()
   const decoder = new TextDecoder('utf-8')
+  let pendingChunk = ''
   
   const readStream = () => {
     reader.read().then(({ done, value }) => {
       if (done) {
+        if (pendingChunk.trim()) processChunk(pendingChunk)
         loading.value = false
         message.closeAll()
         mainStore.setAIPPTDialogState(false)
@@ -268,7 +273,9 @@ const createPPT = async (template?: { slides: Slide[], theme: SlideTheme }) => {
       }
   
       const chunk = decoder.decode(value, { stream: true })
-      const lines = chunk.split(/\n+/)
+      pendingChunk += chunk
+      const lines = pendingChunk.split(/\n+/)
+      pendingChunk = lines.pop() || ''
 
       for (const line of lines) {
         if (line) processChunk(line)
@@ -280,7 +287,7 @@ const createPPT = async (template?: { slides: Slide[], theme: SlideTheme }) => {
 
   const processChunk = (chunk: string) => {
     try {
-      const text = chunk.replace('```jsonl', '').replace('```json', '').replace('```', '').trim()
+      const text = chunk.replace(/^data:\s*/, '').replace('```jsonl', '').replace('```json', '').replace('```', '').trim()
       if (text) {
         const slide: AIPPTSlide = JSON.parse(jsonrepair(text))
         AIPPT(templateSlides, [slide])

@@ -5,6 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": ".\\.venv\\Scripts\\python.exe -u -m agno_service.run",
+    "dev:api:stop": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$targets = Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'agno_service\\.run' -or $_.CommandLine -match 'agno_service\\.main:app' -or ($_.CommandLine -match 'PPTist\\\\.venv\\\\Scripts\\\\python\\.exe' -and $_.CommandLine -match '--multiprocessing-fork') }; try { Invoke-WebRequest -Uri 'http://127.0.0.1:8000/_internal/shutdown' -Method POST -UseBasicParsing -TimeoutSec 3 | Out-Null } catch { }; if ($targets) { $targets | ForEach-Object { Wait-Process -Id $_.ProcessId -Timeout 5 -ErrorAction SilentlyContinue } }; $remaining = Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'agno_service\\.run' -or $_.CommandLine -match 'agno_service\\.main:app' -or ($_.CommandLine -match 'PPTist\\\\.venv\\\\Scripts\\\\python\\.exe' -and $_.CommandLine -match '--multiprocessing-fork') }; if ($remaining) { $remaining | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue } }\"",
+    "dev:api:restart": "pnpm run dev:api:stop && pnpm run dev:api",
+    "dev:all": "run-p dev dev:api",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
