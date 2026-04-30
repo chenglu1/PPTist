@@ -9,13 +9,13 @@
 [![Gitee stars](https://gitee.com/pptist/PPTist/badge/star.svg?theme=gvp)](https://gitee.com/pptist/PPTist)
 [![Gitcode stars](https://gitcode.com/pipipi-pikachu/PPTist/star/badge.svg)](https://gitcode.com/pipipi-pikachu/PPTist)
 
-简体中文 | [English](README.md)
+简体中文 | [English](README_EN.md)
 
 
 # 🎨 PPTist
 **PowerPoint-ist（/'pauəpɔintist/）**，一个基于 Web 的在线演示文稿（幻灯片）应用，还原了大部分 Office PowerPoint 常用功能，支持 文字、图片、形状、线条、图表、表格、视频、音频、公式 几种最常用的元素类型，可以在 Web 浏览器中编辑/演示幻灯片。
 
-**在线体验地址👉：[https://pipipi-pikachu.github.io/PPTist/](https://pipipi-pikachu.github.io/PPTist/)**
+**在线体验地址👉：[https://pp-list.vercel.app/](https://pp-list.vercel.app/)**
 
 > 国内镜像（定期同步）：[Gitee](https://gitee.com/pptist/PPTist)、[GitCode](https://gitcode.com/pipipi-pikachu/PPTist)
 

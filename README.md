@@ -9,207 +9,195 @@
 [![Gitee stars](https://gitee.com/pptist/PPTist/badge/star.svg?theme=gvp)](https://gitee.com/pptist/PPTist)
 [![Gitcode stars](https://gitcode.com/pipipi-pikachu/PPTist/star/badge.svg)](https://gitcode.com/pipipi-pikachu/PPTist)
 
-[简体中文](README_zh.md) | English
+简体中文 | [English](README_EN.md)
 
 
 # 🎨 PPTist
-**PowerPoint-ist（/'pauəpɔintist/）**, A web-based presentation (slideshow) application. This application replicates most of the commonly used features of Microsoft Office PowerPoint. It supports various essential element types such as text, images, shapes, lines, charts, tables, videos, audio, and formulas. You can edit and present slides directly in a web browser.
+**PowerPoint-ist（/'pauəpɔintist/）**，一个基于 Web 的在线演示文稿（幻灯片）应用，还原了大部分 Office PowerPoint 常用功能，支持 文字、图片、形状、线条、图表、表格、视频、音频、公式 几种最常用的元素类型，可以在 Web 浏览器中编辑/演示幻灯片。
 
-**Try it online👉：[https://pipipi-pikachu.github.io/PPTist/](https://pipipi-pikachu.github.io/PPTist/)**
+**在线体验地址👉：[https://pp-list.vercel.app/](https://pp-list.vercel.app/)**
 
-> China Mirrors (Synchronized Regularly): [Gitee](https://gitee.com/pptist/PPTist)、[GitCode](https://gitcode.com/pipipi-pikachu/PPTist)
+> 国内镜像（定期同步）：[Gitee](https://gitee.com/pptist/PPTist)、[GitCode](https://gitcode.com/pipipi-pikachu/PPTist)
 
-
-# ✨ Highlights
-1. **Easy Development**: Built with Vue 3.x and TypeScript, it does not rely on UI component libraries and avoids third-party components as much as possible. This makes styling customization easier and functionality extension more convenient.
-2. **User Friendly**: It offers a context menu available everywhere, dozens of keyboard shortcuts, and countless editing detail optimizations, striving to replicate a desktop application-level experience.
-3. **Feature Rich**: Supports most of the commonly used elements and functionalities found in PowerPoint, supports generate PPT by AI, supports exporting in various formats, and offers basic editing and previewing on mobile devices.
-
-
-# 👀 Front-Row Reminder
-1. The target audience for this project is developers with web slide development needs and basic web development experience. The provided link is for demonstration purposes only and does not offer any online services. This project should not be used directly as a tool, nor does it support out-of-the-box use. If you simply need a ready-made service or tool, please consider other products.
-2. Here are some summarized [Frequently Asked Questions](/doc/Q&A.md). When raising Issues or submitting PRs for the first time, be sure to read this document in advance.
-3. For commercial use, please refer to [商业用途](#-商业用途)
+# ✨ 项目特色
+1. 易开发：基于 Vue3.x + TypeScript 构建，不依赖UI组件库，尽量避免第三方组件，样式定制更轻松、功能扩展更方便。
+2. 易使用：随处可用的右键菜单、几十种快捷键、无数次编辑细节打磨，力求还原桌面应用级体验。
+3. 功能丰富：支持 PPT 中的大部分常用元素和功能，支持AI生成PPT、支持多种格式导出、支持移动端基础编辑和预览...
 
 
-# 🧩 Project Positioning
-> This project is strictly positioned as a Web Slide Editing/Presentation Application. It is not intended to be an ~~AI PPT generator, low-code platform, or image editor~~. The following are the recommendation levels for common use cases:
-
-- **Low-code Platforms / H5 Editors / Image Editors / Whiteboards** (Recommendation: Not Recommended): We suggest choosing open-source projects specifically designed for those purposes.
-- **PPT File Preview Tool** (Recommendation: ⭐): The ability to import .pptx files is limited (roughly 70%~80% fidelity). Unless your requirements for preview accuracy are low and you only need basic content display, this is not recommended.
-- **AI PPT Generation Tool** (Recommendation: ⭐⭐): While the project provides basic template-based AI generation, it is not the core focus. As AI technology evolves (moving from templates to HTML-based or image-based generation), this project will not necessarily follow those trends. However, if you wish to build a template-based AI generator and are willing to implement your own generation logic, PPTist’s robust editing capabilities make it a strong foundation.
-- **Office PPT Authoring Tool** (Recommendation: ⭐⭐): PPTist supports many common Office features and basic .pptx export. However, exports are not 100% identical to the original, and as mentioned, import capabilities are limited. Choose this only if you can accept these limitations.
-- **Web Slide Editing/Presentation App** (Recommendation: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐): This is the primary use case. The core strengths of PPTist are its editing capabilities and user experience. You can build upon this project to customize or add unique nodes and features tailored to your specific needs, where Office compatibility is not the ultimate goal. **Summary: Our vision is for you to use PPTist to create a presentation product that is distinct from Microsoft Office, rather than just using it as a middleman for editing Office files.**
+# 👀 前排提示
+1. 本项目的目标受众是**有Web幻灯片开发需求的开发者，需要有基础的web开发经验**，提供的链接只是一个演示地址，不提供任何在线服务。你不应该直接将本项目作为工具使用，也不支持开箱即用。如果你只是需要一个服务或工具，可以选择更优秀和成熟的产品。
+2. 这里总结了一些[常见问题](/doc/Q&A.md)，第一次提 Issues 和 PR 时，务必提前阅读此文档。
+3. 商用相关请参阅[商业用途](#-商业用途)
 
 
-# 🚀 Installation
-> node.js version >= 20
+# 🧩项目定位
+> 本项目定位为一个**Web 幻灯片编辑/演示应用**，而不是~~AIPPT生成工具、低代码平台、H5编辑器、图片编辑器 、白板应用~~等。以下是一些常见使用场景推荐度：
+
+- **低代码平台/H5编辑器/图片编辑器/白板应用**（推荐度：完全不推荐）：建议选择匹配度更高的开源项目。
+- **PPT文件预览工具**（推荐度：⭐）：导入PPTX文件的能力有限（综合来看，大约仅有70%~80%的还原度），除非你预览样式要求不高，只追求基本的内容展示，否则不建议使用。
+- **AIPPT生成工具**（推荐度：⭐⭐）：本项目虽然提供了基础的模板式AIPPT生成功能，但并非核心，随着AI技术的发展，AIPPT的形态会不断变化（模板 -> HTML网页 -> 纯图 -> SVG -> ...），本项目不会跟进。但如果你只是想做一个模板式的AIPPT生成工具，并且愿意自行实现/优化更好的生成流程，那么依托于PPTist完善的后续编辑能力，本项目可能会对你有一定的帮助。
+- **Office PPT制作工具**（推荐度：⭐⭐）：本项目支持大量Office PPT常用功能，也支持基本的导出本地PPTX文件，但毕竟导出功能做不到100%还原，最关键的是这种场景下对导入PPTX文件的要求一般也非常高，而前面提到导入PPTX文件的能力及其有限。因此，除非你能接受残缺的导入能力，否则请谨慎选择。
+- **Web 幻灯片编辑/演示应用**（推荐度：⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐）：这是最推荐的场景，编辑能力和编辑体验是PPTist最核心的优势，你可以在本项目的基础上，根据自己的需求，定制/新增一些个性化的节点/功能，不以导入导出为最终目的（毕竟这些定制化的东西在Office PPT中是不存在的）。**一句话总结：我更希望你基于PPTist打造一个不同于Office PPT的演示类产品，而不只是做一个Office PPT的编辑中转站。**
+
+
+# 🚀 项目运行
+> node version >= 20
 
 ```
 npm install
 
 npm run dev
 ```
-Browser access: http://127.0.0.1:5173/
+浏览器访问：http://127.0.0.1:5173/
 
 
-# 📚 Features
-### Basic Features
-- History (undo, redo)
-- Shortcuts
-- Right-click menu
-- Export local files (PPTX, JSON, images, PDF)
-- Import and export pptist files
-- Print
-- AI PPT
-### Slide Page Editing
-- Add/delete pages
-- Copy/paste pages
-- Adjust page order
-- Create sections
-- Background settings (solid color, gradient, image)
-- Set canvas size
-- Gridlines
-- Rulers
-- Canvas zoom and move
-- Theme settings
-- Extract slides style
-- Speaker notes (rich text)
-- Slide templates
-- Transition animations
-- Element animations (entrance, exit, emphasis)
-- Selection panel (hide elements, layer sorting, element naming)
-- Labels for Page and Node Types (usable for template-related features)
-- Find/replace
-- Annotations
-### Slide Element Editing
-- Add/delete elements
-- Copy/paste elements
-- Drag and move elements
-- Rotate elements
-- Scale elements
-- Multiple element selection (marquee, point selection)
-- Group multiple elements
-- Batch edit multiple elements
-- Lock elements
-- Magnetic alignment of elements (move and scale)
-- Adjust element layer
-- Align elements to canvas
-- Align elements to other elements
-- Evenly distribute multiple elements
-- Drag to add text and images
-- Paste external images
-- Set element coordinates, size, and rotation
-- Element hyperlinks (link to webpage, link to other slide pages)
-#### Text
-- Rich text editing (color, highlight, font, font size, bold, italic, underline, strikethrough, subscript, inline code, quote, hyperlink, alignment, numbering, bullet points, paragraph indent, clear formatting)
-- Line height
-- Character spacing
-- Paragraph spacing
-- First line indent
-- Fill color
-- Border
-- Shadow
-- Transparency
-- Vertical text
-- AI Rewrite/Expand/Abbreviate
-#### Images
-- Crop (custom, shape, aspect ratio)
-- Rounding
-- Filters
-- Tint (mask)
-- Flip
-- Border
-- Shadow
-- Replace image
-- Reset image
-- Set as background
-#### Shapes
-- Draw any polygon
-- Draw any line (unclosed shape simulation)
-- Replace shape
-- Fill (solid color, gradient, image)
-- Border
-- Shadow
-- Transparency
-- Flip
-- Shape format painter
-- Edit text (supports rich text, similar to text element’s rich text editing)
-#### Lines
-- Straight lines, polylines, curves
-- Color
-- Width
-- Style (solid, dashed, dotted)
-- Endpoint style
-#### Charts (bar, column, line, area, scatter, pie, donut, radar)
-- Chart type conversion
-- Data editing
-- Background fill
-- Theme color
-- Coordinate system and axis text color
-- Grid color
-- Other chart settings
-- Border
-#### Tables
-- Add/delete rows and columns
-- Theme settings (theme color, header, total row, first column, last column)
-- Merge cells
-- Cell styles (fill color, text color, bold, italic, underline, strikethrough, alignment)
-- Border
-#### Video
-- Preview cover settings
-- Auto play
-#### Audio
-- Icon color
-- Auto play
-- Loop play
-#### Formulas
-- LaTeX editing
-- Color settings
-- Formula line thickness settings
-### Slide Show
-- Brush tools (pen/shape/arrow/highlighter annotation, eraser, blackboard mode)
-- Preview all slides
-- Bottom thumbnails navigation
-- Timer tool
-- Laser pointer
-- Auto play
-- Speaker view
-- Audience view
-### Mobile
-- Basic editing
-  - Add/delete/copy/note/undo redo pages
-  - Insert text, images, rectangles, circles
-  - General element operations: move, scale, rotate, copy, delete, layer adjust, align
-  - Element styles: text (bold, italic, underline, strikethrough, font size, color, alignment), fill color
-- Basic preview
-- Play preview
+# 📚 功能列表
+### 基础功能
+- 历史记录（撤销、重做）
+- 快捷键
+- 右键菜单
+- 导出本地文件（PPTX、JSON、图片、PDF）
+- 导入导出特有 .pptist 文件
+- 打印
+- AI生成PPT
+### 幻灯片页面编辑
+- 页面添加、删除
+- 页面顺序调整
+- 页面复制粘贴
+- 幻灯片分节
+- 背景设置（纯色、渐变、图片）
+- 设置画布尺寸
+- 网格线
+- 标尺
+- 画布缩放、移动
+- 主题设置
+- 提取已有幻灯片风格
+- 演讲者备注（富文本）
+- 幻灯片模板
+- 翻页动画
+- 元素动画（入场、退场、强调）
+- 选择面板（隐藏元素、层级排序、元素命名）
+- 页面和节点类型标注（可用于模板相关功能）
+- 查找/替换
+- 批注
+### 幻灯片元素编辑
+- 元素添加、删除
+- 元素复制粘贴
+- 元素拖拽移动
+- 元素旋转
+- 元素缩放
+- 元素多选（框选、点选）
+- 多元素组合
+- 多元素批量编辑
+- 元素锁定
+- 元素吸附对齐（移动和缩放）
+- 元素层级调整
+- 元素对齐到画布
+- 元素对齐到其他元素
+- 多元素均匀分布
+- 拖拽添加图文
+- 粘贴外部图片
+- 元素坐标、尺寸和旋转角度设置
+- 元素超链接（链接到网页、链接到其他幻灯片页面）
+#### 文字
+- 富文本编辑（颜色、高亮、字体、字号、加粗、斜体、下划线、删除线、角标、行内代码、引用、超链接、对齐方式、序号、项目符号、段落缩进、清除格式）
+- 行高
+- 字间距
+- 段间距
+- 首行缩进
+- 填充色
+- 边框
+- 阴影
+- 透明度
+- 竖向文本
+- AI改写/扩写/缩写
+#### 图片
+- 裁剪（自定义、按形状、按纵横比）
+- 圆角
+- 滤镜
+- 着色（蒙版）
+- 翻转
+- 边框
+- 阴影
+- 替换图片
+- 重置图片
+- 设置为背景图
+#### 形状
+- 绘制任意多边形
+- 绘制任意线条（未封闭形状模拟）
+- 替换形状
+- 填充（纯色、渐变、图片）
+- 边框
+- 阴影
+- 透明度
+- 翻转
+- 形状格式刷
+- 编辑文字（支持富文本，与文字元素的富文本编辑功能近似）
+#### 线条
+- 直线、基础折线/曲线
+- 颜色
+- 宽度
+- 样式（实线、虚线、点线）
+- 端点样式
+#### 图表（柱状图、条形图、折线图、面积图、散点图、饼图、环形图、雷达图）
+- 图表类型转换
+- 数据编辑
+- 背景填充
+- 主题色
+- 坐标轴/坐标文字颜色
+- 网格颜色
+- 堆积模式、平滑曲线等
+#### 表格
+- 行、列添加删除
+- 主题设置（主题色、表头、汇总行、第一列、最后一列）
+- 合并单元格
+- 单元格样式（填充色、文字颜色、加粗、斜体、下划线、删除线、对齐方式）
+- 边框
+#### 视频
+- 预览封面设置
+- 自动播放
+#### 音频
+- 图标颜色
+- 自动播放
+- 循环播放
+#### 公式
+- LaTeX编辑
+- 颜色设置
+- 公式线条粗细设置
+### 幻灯片放映
+- 画笔工具（画笔/形状/箭头/荧光笔标注、橡皮擦除、黑板模式）
+- 全部幻灯片预览
+- 触底显示缩略图导航
+- 计时器工具
+- 激光笔
+- 自动放映
+- 演讲者视图
+- 观众视图
+### 移动端
+- 基础编辑
+    - 页面添加、删除、复制、备注、撤销重做
+    - 插入文字、图片、矩形、圆形
+    - 元素通用操作：移动、缩放、旋转、复制、删除、层级调整、对齐
+    - 元素样式：文字（加粗、斜体、下划线、删除线、字号、颜色、对齐方向）、填充色
+- 基础预览
+- 播放预览
 
 
-# 👀 FAQ
-Some common problems: [FAQ](/doc/Q&A.md)
+# 🎯 开发
+目前没有完整的开发文档，但下面这些文档可能会对你有一些帮助：
+- [项目目录与数据结构](/doc/DirectoryAndData.md)
+- [画布与元素的基本原理](/doc/Canvas.md)
+- [如何自定义一个元素](/doc/CustomElement.md)
+- [关于AIPPT](/doc/AIPPT.md)
+
+下面是一些辅助开发的工具/仓库：
+- 导入PPTX文件参考：[pptxtojson](https://github.com/pipipi-pikachu/pptxtojson)
+- 绘制形状：[svgPathCreator](https://github.com/pipipi-pikachu/svgPathCreator)
 
 
-# 🎯 Supplement
-There is currently no complete development documentation, but the following documents may be of some help to you:
-- [Project Directory and Data Structure](/doc/DirectoryAndData.md)
-- [Fundamentals of Canvas and Elements](/doc/Canvas.md)
-- [How to Customize an Element](/doc/CustomElement.md)
-- [About AIPPT](/doc/AIPPT.md)
-
-Here are some auxiliary development tools/repositories:
-- Import PPTX file reference: [pptxtojson](https://github.com/pipipi-pikachu/pptxtojson)
-- Draw shape: [svgPathCreator](https://github.com/pipipi-pikachu/svgPathCreator)
-
-
-# 📄 License
-[AGPL-3.0 License](https://github.com/pipipi-pikachu/PPTist/blob/master/LICENSE) | Copyright © 2020-PRESENT [pipipi-pikachu](https://github.com/pipipi-pikachu)
-
-# 🧮 Commercial
-If you wish to use this project for commercial gain, I hope you will respect open source and strictly adhere to the AGPL-3.0 license, giving back to the open source community. Or contact the author for an independent commercial license.
-
-
-
+# 📄 版权声明/开源协议
+[AGPL-3.0 License](/LICENSE) | Copyright © 2020-PRESENT [pipipi-pikachu](https://github.com/pipipi-pikachu)
 
 
 # 🧮 商业用途
